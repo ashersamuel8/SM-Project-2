@@ -7,7 +7,7 @@ public class TriState extends NonResident {
 	
 	public TriState(String name, Major major, int numberOfCredits, String state) {
 		super(name, major, numberOfCredits);
-		this.state = state.toLowerCase();
+		this.state = state;
 	}
 	
 	@Override
@@ -15,10 +15,10 @@ public class TriState extends NonResident {
 		super.tuitionDue();
 		
 		switch(state) {
-			case "ny":	
+			case "NY":	
 				this.setTuition(getTuition()-4000);
 				break;
-			case "ct":
+			case "CT":
 				this.setTuition(getTuition()-5000);
 				break;
 		}

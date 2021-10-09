@@ -1,6 +1,7 @@
 
 public class NonResident extends Student {
-	private static final int NON_RESIDENT_TUITION = 29737;
+	
+	public static final int NON_RESIDENT_TUITION = 29737;
 	private static final int NON_RESIDENT_CREDIT_RATE = 966; 
 	
 	public NonResident() {	
@@ -13,21 +14,19 @@ public class NonResident extends Student {
 	@Override
 	public void tuitionDue() {
 		if (this.getNumberOfCredits() >= 12) {
-			double tempTuition = this.NON_RESIDENT_TUITION + this.getFullTimeUniversityFee();
+			double tempTuition = NonResident.NON_RESIDENT_TUITION + Student.FULL_TIME_UNIVERSITY_FEE;
 			if (this.getNumberOfCredits() > 16) {
-				tempTuition += (this.getNumberOfCredits() - 16) * this.NON_RESIDENT_CREDIT_RATE;
+				tempTuition += (this.getNumberOfCredits() - 16) * NonResident.NON_RESIDENT_CREDIT_RATE;
 			}
 			
 			this.setTuition(tempTuition);
 		}
 		else {
-			double tempTuition = (this.NON_RESIDENT_CREDIT_RATE * this.getNumberOfCredits()) + this.getPartTimeUniversityFee();
+			double tempTuition = (NonResident.NON_RESIDENT_CREDIT_RATE * this.getNumberOfCredits()) + Student.PART_TIME_UNIVERSITY_FEE;
 			
 			this.setTuition(tempTuition);
 		}
 	}
 	
-	public int getNonResidentTuition() {
-		return this.NON_RESIDENT_TUITION;
-	}
+	
 }

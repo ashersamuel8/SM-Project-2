@@ -1,17 +1,18 @@
 
+
 public class Roster {
 	
-	private Student[] roster;
+	private Student[] rosterList;
 	private int size; //keep track of the number of students in the roster 
 	
 	private int find(Student student) {
 		 
 		int rosterIndex = -1;
-		for ( int i = 0; i < roster.length; i++ ) {
+		for ( int i = 0; i < rosterList.length; i++ ) {
 			
-			if (roster[i] == null) break;
+			if (rosterList[i] == null) break;
 			
-			if (student.equals(roster[i])) {
+			if (student.equals(rosterList[i])) {
 				
 				rosterIndex = i;
 				break;
@@ -25,36 +26,34 @@ public class Roster {
 	} 
 	private void grow() { 
 		
-		Student[] buffArray = new Student[roster.length + 4];
+		Student[] buffArray = new Student[rosterList.length + 4];
 		
-			for (int i = 0; i < roster.length; i++) {
+			for (int i = 0; i < rosterList.length; i++) {
 				
-				buffArray[i] = roster[i];
+				buffArray[i] = rosterList[i];
 			
 			}
 		
-		roster = buffArray;
+		rosterList = buffArray;
 		
 		
 	}
 	public boolean add(Student student) { 
 		
-
 		int exists = find(student);
 		
-
 		if ( exists == -1 ) {
 		
-			if ( size == roster.length ) {
+			if ( size == rosterList.length ) {
 				
 				grow();
-				roster[size] = student;
+				rosterList[size] = student;
 				size++;
 			
 			}
 			else {
 				
-				roster[size] = student;
+				rosterList[size] = student;
 				size++;
 				
 			}
@@ -64,8 +63,7 @@ public class Roster {
 		}
 		
 		return false;
-		
-		
+			
 	} 
 	public boolean remove(Student student) { 
 		
@@ -75,36 +73,37 @@ public class Roster {
 	
 		if (exists != -1) {
 			
-			for (int i = exists + 1; i < roster.length; i++ ) {
-				
-				roster[i-1] = roster[i];
-					
-			}	
-			size--;
+			if(rosterList[exists] instanceof Resident) {
 			
-			return true;
+				for (int i = exists + 1; i < rosterList.length; i++ ) {
+				
+					rosterList[i-1] = rosterList[i];
+					
+				}	
+				size--;
+				return true;
+			}
 			
 		}
 		
 		return false;
 		
-		
 	}
 	
 	public void print() {	
 		
-		if (roster[0] == null ) {
+		if (rosterList[0] == null ) {
 			System.out.println("Student Roster is empty!");
 			return;
 		}
 		
 		System.out.println("* List of students in the roster **");
 		
-		for(int i = 0; i < roster.length; i++) {
+		for(int i = 0; i < rosterList.length; i++) {
 			
-			if (roster[i] == null) break;
+			if (rosterList[i] == null) break;
 			
-			System.out.println(roster[i].toString());	
+			System.out.println(rosterList[i].toString());	
 			
 		}	
 		
@@ -116,25 +115,25 @@ public class Roster {
 
 	public void printByStudentName() {
 		
-		if (roster[0] == null ) {
+		if (rosterList[0] == null ) {
 			System.out.println("Student roster is empty!");
 			return;
 		}
 		
 	
-		for( int i = 0; i < roster.length; i++ ) {
+		for( int i = 0; i < rosterList.length; i++ ) {
 			
-			if (roster[i] == null) break;
+			if (rosterList[i] == null) break;
 			
-		    for( int j = 0; j < roster.length - 1; j++ ) {
+		    for( int j = 0; j < rosterList.length - 1; j++ ) {
 		    	
-		    	if(roster[j] == null || roster[j+1] == null) break;
+		    	if(rosterList[j] == null || rosterList[j+1] == null) break;
 		    	
-		        if( roster[j].getName().compareTo(roster[j+1].getName()) > 0 ) {
+		        if( rosterList[j].getName().compareTo(rosterList[j+1].getName()) > 0 ) {
 		        	
-		            Student temp = roster[j];
-		            roster[j] = roster[j+1];
-		            roster[j+1] = temp;
+		            Student temp = rosterList[j];
+		            rosterList[j] = rosterList[j+1];
+		            rosterList[j+1] = temp;
 		       }
 		    }
 		}
@@ -142,11 +141,11 @@ public class Roster {
 		System.out.println("* List of students ordered by name **");
 		
 		
-		for (int i = 0; i < roster.length; i++) {
+		for (int i = 0; i < rosterList.length; i++) {
 			
-			if (roster[i] == null) break;
+			if (rosterList[i] == null) break;
 			
-			System.out.println(roster[i].toString());
+			System.out.println(rosterList[i].toString());
 			
 		}	
 		
@@ -158,7 +157,7 @@ public class Roster {
 
 	public void printByPaymentDate() {
 		
-		if (roster[0] == null ) {
+		if (rosterList[0] == null ) {
 			System.out.println("Student roster is empty!");
 			return;
 		}
@@ -166,46 +165,140 @@ public class Roster {
 		System.out.println("* List of students made payments ordered by payment date **");
 		
 		
-		for( int i = 0; i < roster.length; i++ ) {
+		for( int i = 0; i < rosterList.length; i++ ) {
 			
-			if (roster[i] == null) break;
+			if (rosterList[i] == null) break;
 			
-		    for( int j=0; j < roster.length - 1; j++ ) {
+		    for( int j=0; j < rosterList.length - 1; j++ ) {
 		    	
-		    	if(roster[j] == null || roster[j+1] == null) break;
+		    	if(rosterList[j] == null || rosterList[j+1] == null) break;
 		    	
-		    	if(roster[j].getIsDue()) continue;
+		    	if(rosterList[j].getTotalPayment() == 0) continue;
 		    	
-		        if( roster[j].getPaymentDate().compareTo(roster[j+1].getPaymentDate()) > 0 ) {
+		        if( rosterList[j].getPaymentDate().compareTo(rosterList[j+1].getPaymentDate()) > 0 ) {
 		        	
-		        	Student temp = roster[j];
-		        	roster[j] = roster[j+1];
-		        	roster[j+1] = temp;
+		        	Student temp = rosterList[j];
+		        	rosterList[j] = rosterList[j+1];
+		        	rosterList[j+1] = temp;
 		        		
 		       }
 		    }
 		    
 		}
 		
-		for (int i = 0; i < roster.length; i++) {
+		for (int i = 0; i < rosterList.length; i++) {
 			
-			if (roster[i] == null) break;
+			if (rosterList[i] == null) break;
 			
-			if (roster[i].getIsDue()) continue;
+			if (rosterList[i].getTotalPayment() == 0) continue;
 			
-			System.out.println(roster[i].toString());
+			System.out.println(rosterList[i].toString());
 			
 		}
 		
-		System.out.println("*End of list");
+		System.out.println("* End of roster **");
 		return;
 		
 	}
 
+	public void calculateTuition() {
+		
+		for( int i = 0; i < rosterList.length; i++ ) {
+			
+			if (rosterList[i] == null) break;
+			
+			rosterList[i].tuitionDue();
+			
+		}
+		
+		
+	}
+	
+	public int payTuition(String name, Major major, double fees, Date paymentDate) {
+				
+		Student student = new Student(name, major);
+		int index = find(student);
+		
+		if(index != -1) {
+			
+			if((rosterList[index].getTotalPayment() + fees) > rosterList[index].getTuition()) {
+				return 1;
+			}
+			else {
+				rosterList[index].setTotalPayment(rosterList[index].getTotalPayment() + fees);
+				return 0;		
+			}	
+			
+		}
+		return -1;
+	}
+	
+	public int setStudyAbroadStatus(String name, Major major, boolean studyAbroadStatus) {
+		
+		Student student = new Student(name, major);
+		
+		int index = find(student);
+		
+		if(rosterList[index] instanceof International) {
+			
+			if(((International) rosterList[index]).getStudyAbroadStatus() == studyAbroadStatus) {
+				return 0;
+			}
+			else {
+				
+				if(rosterList[index].getNumberOfCredits() > 12) {
+					rosterList[index].setNumberOfCredits(12);
+				}
+					((International) rosterList[index]).tuitionDue();
+					rosterList[index].setTotalPayment(0);
+					rosterList[index].setPaymentDate(null);
+					
+			}
+			
+		}
+		
+		return -1;
+		
+	}
+	
+	public int calculateFinancialAid(String name, Major major, double financialAid) {
+		
+		Student student = new Student(name, major);
+		
+		int index = find(student);
+		
+		if(index != -1) {
+			
+			if(rosterList[index] instanceof Resident) {
+				
+				if(rosterList[index].getNumberOfCredits() < 12) return -1;
+				
+				else {
+					
+					if(((Resident) rosterList[index]).getFinancialAid() == 0) {
+						
+						((Resident) rosterList[index]).setFinancialAid(financialAid);
+						
+						return 1;
+					}
+					
+					return 0;
+					
+				}
+				
+			}
+	
+		}
+		
+		return -2;
+		
+		
+	}
+	
 	
 	public Roster(){
 		
-		roster = new Student[4];
+		rosterList = new Student[4];
 		size = 0;
 		
 	}

@@ -6,20 +6,24 @@ public class International extends NonResident {
 	public International() {
 	}
 	
-	public International(String name, Major major, int numberOfCredits) {
+	public International(String name, Major major, int numberOfCredits, boolean studyAbroadProgram) {
 		super(name, major, numberOfCredits);
+		this.studyAbroadProgram = studyAbroadProgram;
 	}
 	
 	public void setStudyAbroadStatus(boolean status) {
 		this.studyAbroadProgram = status;
 	}
+	public boolean getStudyAbroadStatus() {
+		return this.studyAbroadProgram;
+	}
 	
 	@Override
 	public void tuitionDue() {
 		super.tuitionDue();
-		this.setTuition(getTuition() + this.INTERNATIONAL_FEE);
+		this.setTuition(getTuition() + International.INTERNATIONAL_FEE);
 		if (studyAbroadProgram) {
-			this.setTuition(getTuition() - this.getNonResidentTuition());
+			this.setTuition(getTuition() - NonResident.NON_RESIDENT_TUITION);
 		}
 	}
 }

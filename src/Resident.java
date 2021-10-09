@@ -1,8 +1,7 @@
 
 public class Resident extends Student {
-	private int financialAid = 0;
-	private static final int RESIDENT_TUITION = 12536;
-	private static final int RESIDENT_CREDIT_RATE = 404; 
+	
+	private double financialAid = 0;
 	
 	public Resident() {
 	}
@@ -11,23 +10,26 @@ public class Resident extends Student {
 		super(name, major, numberOfCredits);
 	}
 	
-	public void setFinancialAid(int financialAid) {
+	public void setFinancialAid(double financialAid) {
 		this.financialAid = financialAid;
+	}
+	public double getFinancialAid() {
+		return this.financialAid;
 	}
 	
 	@Override
 	public void tuitionDue() {
 		if (this.getNumberOfCredits() >= 12) {
-			double tempTuition = this.RESIDENT_TUITION + this.getFullTimeUniversityFee();
+			double tempTuition = Student.RESIDENT_TUITION + Student.FULL_TIME_UNIVERSITY_FEE;
 			if (this.getNumberOfCredits() > 16) {
-				tempTuition += (this.getNumberOfCredits() - 16) * this.RESIDENT_CREDIT_RATE;
+				tempTuition += (this.getNumberOfCredits() - 16) * Student.RESIDENT_CREDIT_RATE;
 			}
 			tempTuition -= this.financialAid;
 			
 			this.setTuition(tempTuition);
 		}
 		else {
-			double tempTuition = (this.RESIDENT_CREDIT_RATE * this.getNumberOfCredits()) + this.getPartTimeUniversityFee();
+			double tempTuition = (Student.RESIDENT_CREDIT_RATE * this.getNumberOfCredits()) + Student.PART_TIME_UNIVERSITY_FEE;
 			tempTuition -= this.financialAid;
 			
 			this.setTuition(tempTuition);

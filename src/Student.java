@@ -4,10 +4,13 @@ public class Student {
 	private Profile profile;
 	private int numberOfCredits;
 	private double tuition;
-	private static final int FULL_TIME_UNIVERSITY_FEE = 3628;
-	private static final double PART_TIME_UNIVERSITY_FEE = FULL_TIME_UNIVERSITY_FEE * 0.8; 
-	private static final int RESIDENT_CREDIT_RATE = 404;
-	private static final int NON_RESIDENT_CREDIT_RATE = 966;
+	private double totalPayment;
+	private Date paymentDate;
+	public static final int FULL_TIME_UNIVERSITY_FEE = 3628;
+	public static final double PART_TIME_UNIVERSITY_FEE = FULL_TIME_UNIVERSITY_FEE * 0.8; 
+	public static final int RESIDENT_CREDIT_RATE = 404;
+	public static final int NON_RESIDENT_CREDIT_RATE = 966;
+	public static final int RESIDENT_TUITION = 12536;
 	
 	public Student() {
 	}
@@ -15,9 +18,17 @@ public class Student {
 	public Student(String name, Major major, int numberOfCredits) {
 		this.profile = new Profile(name, major);
 		this.numberOfCredits = numberOfCredits;
+		this.totalPayment = 0;
+		this.tuition = 0;
+	}
+	public Student(String name, Major major) {
+		this.profile = new Profile(name, major);
+		this.totalPayment = 0;
+		this.tuition = 0;
 	}
 	
 	public void tuitionDue() { 
+		
 	}
 	
 	@Override
@@ -36,22 +47,49 @@ public class Student {
 	public int getNumberOfCredits() {
 		return this.numberOfCredits;
 	}
-	
-	public int getFullTimeUniversityFee() {
-		return this.FULL_TIME_UNIVERSITY_FEE;
+	public void setNumberOfCredits(int credits) {
+		this.numberOfCredits = credits;
+	}
+	public String getName() {
+		return this.profile.getName();
+	}
+	public Date getPaymentDate() {
+		return this.paymentDate;
+	}
+	public void setPaymentDate(Date paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+//	public boolean getIsDue() {
+//		return this.isDue;
+//	}
+//	public boolean setIsDue(boolean isDue) {
+//		
+//		this.isDue = isDue;
+//		return isDue;
+//		
+//	}
+	public Profile getProfile() {
+		return this.profile;
+	}
+	public void setTotalPayment(double payment) {
+		this.totalPayment = payment;
+		
+	}
+	public double getTotalPayment() {
+		return this.totalPayment;
 	}
 
-	public double getPartTimeUniversityFee() {
-		return this.PART_TIME_UNIVERSITY_FEE;
-	}
-
-	/*
-	public double getResidentCreditRate() {
-		return this.RESIDENT_CREDIT_RATE;
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Student) {
+			
+			Student student = (Student) obj;
+			
+			return (this.profile.equals(student.getProfile()));
+		}
+		
+		return false;
 	}
 	
-	public double getNonResidentCreditRate() {
-		return this.NON_RESIDENT_CREDIT_RATE;
-	}
-	*/
 }
