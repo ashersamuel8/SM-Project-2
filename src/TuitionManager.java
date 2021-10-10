@@ -484,8 +484,6 @@ public class TuitionManager {
 			
 			
 			
-			
-			
 		} catch(Exception e) {
 			System.out.println(e);
 		}

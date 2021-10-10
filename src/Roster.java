@@ -292,7 +292,6 @@ public class Roster {
 		
 		return -2;
 		
-		
 	}
 	
 	
@@ -300,6 +299,35 @@ public class Roster {
 		
 		rosterList = new Student[4];
 		size = 0;
+		
+	}
+	
+	public static void main(String args[]) {
+		
+		
+		//Test cases for add() method
+		
+		String add1  = "AR,John Doe,EE,18";					//Student added.
+		String add2  = "AR,Jane Doe";						//Missing data in command line.
+		String add3  = "AR,Jane Doe,CS";					//Credit hours missing.
+		String add4  = "AR,Jane Doe,CS,2";					//Minimum credit hours is 3.
+		String add5  = "AN,Jane Doe,CS,3";					//Student added.
+		String add6  = "AR,John Doe,CS,25";					//Credit hours exceed the maximum 24.
+		String add7  = "AR,John Doe,CS,hi";					//Invalid credit hours.
+		String add8  = "AR,Rob Harrison,xx,0";				//'xx' is not a valid major.
+		String add9  = "AR,John Doe,CS,-10";				//Credit hours cannot be negative.
+		String add10 = "AR";								//Missing data in command line.
+		String add11 = "AN,Jane Doe,CS,3";					//Student is already in the roster.
+		String add12 = "AN,Rob Harrison,ee,12";				//Student added.
+		String add13 = "AT,John Doe,it,18";					//Missing data in command line.
+		String add14 = "AT,John Doe,it,18,NN";				//Not part of the tri-state area.
+		String add15 = "AT,John Doe,it,18,NY";				//Student added.
+		String add16 = "AI,Joshua Patel,CS,12,true";		//Student added.
+		String add17 = "AI,Sunny Lin,ee,9,false";			//International students must enroll  at least 3 credits 
+		String add18 = "AI,Joshua Patel,me,20,false";		//Student added
+		String add19 = "AI,Sunny Lin,BA,16,false";			//Student added
+		String add20 = "AN,Sunny Lin,CS,20";				//Student is already in the roster
+		
 		
 	}
 	
