@@ -1,3 +1,8 @@
+/**
+ * This class defines properties specific to TriState students, it is a child of the NonResident class.
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class TriState extends NonResident {
 	private String state;
@@ -22,5 +27,10 @@ public class TriState extends NonResident {
 				this.setTuition(getTuition()-5000);
 				break;
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + ":" + this.state;
 	}
 }

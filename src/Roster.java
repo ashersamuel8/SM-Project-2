@@ -1,4 +1,8 @@
-
+/**
+ * This class holds all students while the application is running.
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class Roster {
 	
@@ -93,7 +97,7 @@ public class Roster {
 	public void print() {	
 		
 		if (rosterList[0] == null ) {
-			System.out.println("Student Roster is empty!");
+			System.out.println("Student roster is empty!");
 			return;
 		}
 		

@@ -1,3 +1,10 @@
+/**
+ * This class performs the Input/Output part of this project.
+ * It uses an instance of the Roster class to process all tuition related commands
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
+
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.InputMismatchException;
@@ -40,13 +47,13 @@ public class TuitionManager {
 		 
 			} catch(Exception e){
 			
-				System.out.println("Missing Information");
+				System.out.println("Missing data in command line.");
 			
 			}
 		 
 		} 
 		
-		System.out.println("Tuition Manager Terminated");		
+		System.out.println("Tuition Manager Terminated.");		
 		
 	}
 	
@@ -121,12 +128,16 @@ public class TuitionManager {
 			String majorString = input.nextToken();
 			int credits = Integer.parseInt(input.nextToken());
 			
+			if(credits < 0) {
+				System.out.println("Credit hours cannot be negative.");
+				return;
+			}
 			if(credits < 3) {
-				System.out.println("Minimum credit hours is 3");
+				System.out.println("Minimum credit hours is 3.");
 				return;
 			}
 			else if(credits > 24) {
-				System.out.println("Credit hours exceed the maximum 24");
+				System.out.println("Credit hours exceed the maximum 24.");
 				return;
 			}
 			
@@ -153,7 +164,7 @@ public class TuitionManager {
 			
 		} catch(InputMismatchException e) {
 			
-			System.out.println("Missing data in command line");
+			System.out.println("Missing data in command line.");
 			
 		}
 		
@@ -201,7 +212,7 @@ public class TuitionManager {
 			
 		} catch(InputMismatchException e) {
 			
-			System.out.println("Missing data in command line");
+			System.out.println("Missing data in command line.");
 			
 		}
 		
@@ -259,7 +270,7 @@ public class TuitionManager {
 			
 		} catch(InputMismatchException e) {
 			
-			System.out.println("Missing data in command line");
+			System.out.println("Missing data in command line.");
 			
 		}
 		
@@ -323,7 +334,7 @@ public class TuitionManager {
 			
 		} catch(InputMismatchException e) {
 			
-			System.out.println("Missing data in command line");
+			System.out.println("Missing data in command line.");
 			
 		}
 		

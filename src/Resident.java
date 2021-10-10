@@ -1,3 +1,8 @@
+/**
+ * This class defines the properties specific to resident students, it is a child of the Student class.
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class Resident extends Student {
 	
@@ -34,5 +39,10 @@ public class Resident extends Student {
 			
 			this.setTuition(tempTuition);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 }

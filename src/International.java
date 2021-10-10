@@ -1,3 +1,8 @@
+/**
+ * This class defines all of the properties specific to international students, it is a child of the NonResident class. 
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class International extends NonResident {
 	private static final int INTERNATIONAL_FEE = 2650;
@@ -25,5 +30,10 @@ public class International extends NonResident {
 		if (studyAbroadProgram) {
 			this.setTuition(getTuition() - NonResident.NON_RESIDENT_TUITION);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 }

@@ -1,3 +1,8 @@
+/**
+ * This class defines the properties that are specific to nonresident students, it is a child of the Student class.
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class NonResident extends Student {
 	
@@ -28,5 +33,8 @@ public class NonResident extends Student {
 		}
 	}
 	
-	
+	@Override
+	public String toString() {
+		return super.toString();
+	}	
 }

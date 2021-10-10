@@ -1,3 +1,8 @@
+/**
+ * This class serves as a parent to all of the various types of students, as it defines all of the items which are common between all students.
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class Student {
 	

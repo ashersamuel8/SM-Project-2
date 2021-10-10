@@ -1,3 +1,8 @@
+/**
+ * This class defines a profile based on name and major, and it is used to uniquely identify students.
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class Profile {
 	
