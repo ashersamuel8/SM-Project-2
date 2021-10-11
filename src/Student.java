@@ -53,7 +53,7 @@ public class Student {
 	@Override
 	public String toString() {
 		
-		final DecimalFormat decimalFormat = new DecimalFormat( "0.00" );
+		final DecimalFormat decimalFormat = new DecimalFormat( "##,##,###.00" );
 		String output = this.profile.toString() + ":" + this.numberOfCredits + " credits hours:tuition due:" 
 						+ decimalFormat.format(this.tuition) + ":total payment:";
 		
