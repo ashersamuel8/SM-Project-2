@@ -1,15 +1,24 @@
+/**
+ * This class defines the properties that are specific to nonresident students, it is a child of the Student class.
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class NonResident extends Student {
 	
 	public static final int NON_RESIDENT_TUITION = 29737;
 	private static final int NON_RESIDENT_CREDIT_RATE = 966; 
 	
-	public NonResident() {	
-	}
-	
+	/**
+	 * A constructor method for the NonResident class
+	 * @param name
+	 * @param major
+	 * @param numberOfCredits
+	 */
 	public NonResident(String name, Major major, int numberOfCredits) {
 		super(name, major, numberOfCredits);
 	}
+	
 	
 	@Override
 	public void tuitionDue() {
@@ -28,5 +37,11 @@ public class NonResident extends Student {
 		}
 	}
 	
-	
+	/**
+	 * A method that prints out the data of a non-resident student
+	 */
+	@Override
+	public String toString() {
+		return super.toString() + ":non-resident";
+	}	
 }

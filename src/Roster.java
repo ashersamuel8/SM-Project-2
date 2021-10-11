@@ -1,10 +1,20 @@
-
+/**
+ * This class performs actions like add, remove, printing, setting study abroad status, and calculating tuition & financial aid
+ * on the roster.
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class Roster {
 	
 	private Student[] rosterList;
-	private int size; //keep track of the number of students in the roster 
+	private int size; 			//keep track of the number of students in the roster 
 	
+	/**
+	 * A private method that searches for a student the roster array list and returns the index.
+	 * @param student
+	 * @return index of the student, -1 if student does not exist.
+	 */
 	private int find(Student student) {
 		 
 		int rosterIndex = -1;
@@ -24,6 +34,10 @@ public class Roster {
 		return rosterIndex;
 		
 	} 
+	
+	/**
+	 * This method grows the size of the roster array list by 4 every time its capacity is full.
+	 */
 	private void grow() { 
 		
 		Student[] buffArray = new Student[rosterList.length + 4];
@@ -38,25 +52,22 @@ public class Roster {
 		
 		
 	}
+	
+	/**
+	 * This method adds a student to the roster array list. 
+	 * @param student
+	 * @return true if student is added, false if student already exists
+	 */
 	public boolean add(Student student) { 
 		
 		int exists = find(student);
 		
 		if ( exists == -1 ) {
 		
-			if ( size == rosterList.length ) {
+			if ( size == rosterList.length ) grow();
 				
-				grow();
-				rosterList[size] = student;
-				size++;
-			
-			}
-			else {
-				
-				rosterList[size] = student;
-				size++;
-				
-			}
+			rosterList[size] = student;
+			size++;
 			
 			return true;
 			
@@ -65,6 +76,12 @@ public class Roster {
 		return false;
 			
 	} 
+	
+	/**
+	 * This method removes a student from the roster array list
+	 * @param student
+	 * @return true is student is removed, false if student doesnt exist/not removed
+	 */
 	public boolean remove(Student student) { 
 		
 
@@ -73,16 +90,14 @@ public class Roster {
 	
 		if (exists != -1) {
 			
-			if(rosterList[exists] instanceof Resident) {
-			
-				for (int i = exists + 1; i < rosterList.length; i++ ) {
-				
-					rosterList[i-1] = rosterList[i];
+				for (int i = exists + 1; i <= rosterList.length; i++ ) {
+					
+					if(i != rosterList.length) rosterList[i-1] = rosterList[i];
+					else rosterList[i-1] = null;
 					
 				}	
 				size--;
 				return true;
-			}
 			
 		}
 		
@@ -90,10 +105,13 @@ public class Roster {
 		
 	}
 	
+	/**
+	 * A method that prints out the roster list
+	 */
 	public void print() {	
 		
 		if (rosterList[0] == null ) {
-			System.out.println("Student Roster is empty!");
+			System.out.println("Student roster is empty!");
 			return;
 		}
 		
@@ -112,7 +130,9 @@ public class Roster {
 		
 	}
 	
-
+	/**
+	 * A method that prints out the roster list ordered by student name
+	 */
 	public void printByStudentName() {
 		
 		if (rosterList[0] == null ) {
@@ -154,7 +174,10 @@ public class Roster {
 		
 	}
 	
-
+	/**
+	 * A method that prints out the roster list ordered by payment date. 
+	 * Students who did not make at least one payment will not be displayed.
+	 */
 	public void printByPaymentDate() {
 		
 		if (rosterList[0] == null ) {
@@ -173,7 +196,7 @@ public class Roster {
 		    	
 		    	if(rosterList[j] == null || rosterList[j+1] == null) break;
 		    	
-		    	if(rosterList[j].getTotalPayment() == 0) continue;
+		    	if(rosterList[j].getTotalPayment() == 0 || rosterList[j+1].getTotalPayment() == 0) continue;
 		    	
 		        if( rosterList[j].getPaymentDate().compareTo(rosterList[j+1].getPaymentDate()) > 0 ) {
 		        	
@@ -200,7 +223,10 @@ public class Roster {
 		return;
 		
 	}
-
+	
+	/**
+	 * A method to calculate the tuition of all the students in the roster list
+	 */
 	public void calculateTuition() {
 		
 		for( int i = 0; i < rosterList.length; i++ ) {
@@ -214,6 +240,16 @@ public class Roster {
 		
 	}
 	
+	/**
+	 * A method that updates the tuition due of a student when the fees is payed 
+	 * @param name
+	 * @param major
+	 * @param fees
+	 * @param paymentDate
+	 * @return 1 if the fees exceeds tuition due
+	 * @return 0 if the fees is payed and tuition is updated
+	 * @return -1 if the student doesnt exist
+	 */
 	public int payTuition(String name, Major major, double fees, Date paymentDate) {
 				
 		Student student = new Student(name, major);
@@ -226,6 +262,8 @@ public class Roster {
 			}
 			else {
 				rosterList[index].setTotalPayment(rosterList[index].getTotalPayment() + fees);
+				rosterList[index].setPaymentDate(paymentDate);
+				rosterList[index].setTuition(rosterList[index].getTuition() - fees);
 				return 0;		
 			}	
 			
@@ -233,34 +271,56 @@ public class Roster {
 		return -1;
 	}
 	
+	/**
+	 * A method that sets the study abroad status of an international student
+	 * @param name
+	 * @param major
+	 * @param studyAbroadStatus
+	 * @return 1 if the study abroad status is succesfully changed
+	 * @return 0 if the study abroad status is the same as the one that already exists
+	 * @return -1 if the study abroad status is not changed/Student is not an itnernational student/Student not found
+	 */
 	public int setStudyAbroadStatus(String name, Major major, boolean studyAbroadStatus) {
 		
 		Student student = new Student(name, major);
 		
 		int index = find(student);
 		
-		if(rosterList[index] instanceof International) {
+		if(index != -1) {
+			if(rosterList[index] instanceof International) {
 			
-			if(((International) rosterList[index]).getStudyAbroadStatus() == studyAbroadStatus) {
-				return 0;
-			}
-			else {
-				
-				if(rosterList[index].getNumberOfCredits() > 12) {
-					rosterList[index].setNumberOfCredits(12);
+				if(((International) rosterList[index]).getStudyAbroadStatus() == studyAbroadStatus) {
+					return 0;
 				}
+				else {
+				
+					if(rosterList[index].getNumberOfCredits() > 12) {
+						rosterList[index].setNumberOfCredits(12);
+					}
+					
+					((International) rosterList[index]).setStudyAbroadStatus(studyAbroadStatus);
 					((International) rosterList[index]).tuitionDue();
 					rosterList[index].setTotalPayment(0);
 					rosterList[index].setPaymentDate(null);
-					
-			}
+					return 1;
+				}
 			
+			}
 		}
-		
 		return -1;
 		
 	}
 	
+	/**
+	 * A method to calculate and update the financial aid and tuition of a resident student
+	 * @param name
+	 * @param major
+	 * @param financialAid
+	 * @return -1 if the student is part time
+	 * @return 0 if financial aid has already been awarded
+	 * @return 1 if the financial aid has been awarded
+	 * @return -2 if the student is not a resident student/student is not found
+	 */
 	public int calculateFinancialAid(String name, Major major, double financialAid) {
 		
 		Student student = new Student(name, major);
@@ -278,6 +338,7 @@ public class Roster {
 					if(((Resident) rosterList[index]).getFinancialAid() == 0) {
 						
 						((Resident) rosterList[index]).setFinancialAid(financialAid);
+						rosterList[index].setTuition(rosterList[index].getTuition() - financialAid);
 						
 						return 1;
 					}
@@ -306,27 +367,120 @@ public class Roster {
 		
 		
 		//Test cases for add() method
+		Roster testRoster = new Roster();
 		
-		String add1  = "AR,John Doe,EE,18";					//Student added.
-		String add2  = "AR,Jane Doe";						//Missing data in command line.
-		String add3  = "AR,Jane Doe,CS";					//Credit hours missing.
-		String add4  = "AR,Jane Doe,CS,2";					//Minimum credit hours is 3.
-		String add5  = "AN,Jane Doe,CS,3";					//Student added.
-		String add6  = "AR,John Doe,CS,25";					//Credit hours exceed the maximum 24.
-		String add7  = "AR,John Doe,CS,hi";					//Invalid credit hours.
-		String add8  = "AR,Rob Harrison,xx,0";				//'xx' is not a valid major.
-		String add9  = "AR,John Doe,CS,-10";				//Credit hours cannot be negative.
-		String add10 = "AR";								//Missing data in command line.
-		String add11 = "AN,Jane Doe,CS,3";					//Student is already in the roster.
-		String add12 = "AN,Rob Harrison,ee,12";				//Student added.
-		String add13 = "AT,John Doe,it,18";					//Missing data in command line.
-		String add14 = "AT,John Doe,it,18,NN";				//Not part of the tri-state area.
-		String add15 = "AT,John Doe,it,18,NY";				//Student added.
-		String add16 = "AI,Joshua Patel,CS,12,true";		//Student added.
-		String add17 = "AI,Sunny Lin,ee,9,false";			//International students must enroll  at least 3 credits 
-		String add18 = "AI,Joshua Patel,me,20,false";		//Student added
-		String add19 = "AI,Sunny Lin,BA,16,false";			//Student added
-		String add20 = "AN,Sunny Lin,CS,20";				//Student is already in the roster
+		
+		Student student1 = new Student("John Doe", Major.CS, 13);
+		NonResident student2 = new NonResident("John Doe", Major.CS, 20);
+		Resident student3 = new Resident("Rob Harrinson", Major.EE, 15);
+		TriState student4 = new TriState("Jane Doe", Major.ME, 12, "NY");
+		International student5 = new International("Joshua Patel", Major.BA, 14, false);
+		TriState student6 = new TriState("Sunny Lin", Major.IT, 18, "CT");
+		International student7 = new International("Joshua Patel", Major.CS, 14, true);
+		
+			/*		add() test cases		*/
+		
+		//Test case 1
+		if(testRoster.add(student1)) {
+			System.out.println("John Doe,CS   ---  Student added.");
+		} 
+		else {
+			System.out.println("John Doe,CS   ---  Student already exists in the roster.");
+		}
+		
+
+		//Test case 2
+		if(testRoster.add(student2)) {
+			System.out.println("John Doe,CS   ---  Student added.");
+		} 
+		else {
+			System.out.println("John Doe,CS   ---  Student already exists in the roster.");
+		}
+		
+
+		//Test case 3
+		if(testRoster.add(student3)) {
+			System.out.println("Rob Harrison,EE   ---  Student added.");
+		} 
+		else {
+			System.out.println("Rob Harrison,EE   ---  Student already exists in the roster.");
+		}
+		
+
+		//Test case 4
+		if(testRoster.add(student4)) {
+			System.out.println("Jane Doe,ME   ---  Student added.");
+		} 
+		else {
+			System.out.println("Jane Doe,ME   ---  Student already exists in the roster.");
+		}
+		
+
+		//Test case 5
+		if(testRoster.add(student5)) {
+			System.out.println("Joshua Patel,BA   ---  Student added.");
+		} 
+		else {
+			System.out.println("Joshua Patel,BA  ---  Student already exists in the roster.");
+		}
+		
+
+		//Test case 6
+		if(testRoster.add(student6)) {
+			System.out.println("Sunny Lin,IT   ---  Student added.");
+		} 
+		else {
+			System.out.println("Sunny Lin,IT   ---  Student already exists in the roster.");
+		}
+
+		//Test case 7
+		if(testRoster.add(student7)) {
+			System.out.println("Joshua Patel,CS   ---  Student added.");
+		} 
+		else {
+			System.out.println("Joshua Patel,CS   ---  Student already exists in the roster.");
+		}
+		
+		
+		/*		remove() test cases		*/
+		System.out.println();
+		
+		
+		//Test case 1
+		if(testRoster.remove(student1)) {
+			System.out.println("John Doe,CS   ---  Student removed.");
+		} 
+		else {
+			System.out.println("John Doe,CS   ---  Student does not exist in the roster.");
+		}
+		
+
+		//Test case 2
+		if(testRoster.remove(student2)) {
+			System.out.println("John Doe,CS   ---  Student removed.");
+		} 
+		else {
+			System.out.println("John Doe,CS   ---  Student does not exist in the roster.");
+		}
+		
+
+		//Test case 3
+		if(testRoster.remove(student3)) {
+			System.out.println("Rob Harrison,EE   ---  Student removed.");
+		} 
+		else {
+			System.out.println("Rob Harrison,EE   ---  Student does not exist in the roster.");
+		}
+		
+
+		//Test case 4
+		if(testRoster.remove(student4)) {
+			System.out.println("Jane Doe,ME   ---  Student removed.");
+		} 
+		else {
+			System.out.println("Jane Doe,ME   ---  Student does not exist in the roster.");
+		}
+		
 		
 		
 	}

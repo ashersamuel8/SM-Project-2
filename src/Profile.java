@@ -1,3 +1,8 @@
+/**
+ * This class defines a profile based on name and major, and it is used to uniquely identify students.
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 
 public class Profile {
 	
@@ -11,6 +16,10 @@ public class Profile {
 		
 	}
 	
+	/**
+	 * Converts Profile object to a string
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		
@@ -18,6 +27,11 @@ public class Profile {
 		
 	}
 	
+	/**
+	 * Checks if two profiles are equal or not
+	 * @param Object obj
+	 * @return true if objects are equal, false otherwise
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -25,7 +39,7 @@ public class Profile {
 			
 			Profile tempProfile = (Profile) obj;
 			
-			return (this.name.equals(tempProfile.name) && (this.major.equals(tempProfile.major)));
+			return ( (this.name.equals(tempProfile.name) && (this.major.equals(tempProfile.major))));
 			
 		}
 		 
@@ -33,6 +47,10 @@ public class Profile {
 		
 	}
 	
+	/**
+	 * A getter method to get the name attribute of the object Profile
+	 * @return name of the student (profile)
+	 */
 	public String getName() {
 		
 		return this.name;
