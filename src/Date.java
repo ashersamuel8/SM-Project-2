@@ -33,11 +33,20 @@ public class Date implements Comparable<Date> {
 	public Date(String date) {
 		StringTokenizer buffer = new StringTokenizer(date, "/");
 
-		this.month = Integer.parseInt(buffer.nextToken());
+		// month should internally be stored as one less than what was entered because of the way Calendar class is set up
+		this.month = Integer.parseInt(buffer.nextToken()) - ALIGN_MONTHS;;
 		this.day = Integer.parseInt(buffer.nextToken());
 		this.year = Integer.parseInt(buffer.nextToken());
 	}
 
+	public int getMonth() {
+		return this.month;
+	}
+	
+	public int getDay() {
+		return this.day;
+	}
+	
 	/**
 	 * Default constructor creates a Date object with today's date
 	 */
@@ -61,9 +70,7 @@ public class Date implements Comparable<Date> {
 			return false;
 		}
 
-		//shift month value back 1 to align with Calendar class's value for each month
-		int monthValue = this.month - ALIGN_MONTHS;
-
+		int monthValue = this.month;
 		//number of days must be greater than 0
 		if (this.day <= 0) {
 			return false;
@@ -162,7 +169,7 @@ public class Date implements Comparable<Date> {
 	 */
 	@Override
 	public String toString() {
-		return this.month + "/" + this.day + "/" + this.year;
+		return (this.month+1) + "/" + this.day + "/" + this.year;
 	}
 	
 }

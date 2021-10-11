@@ -44,7 +44,7 @@ public class Student {
 	}
 	
 	/**
-	 * The do-nothing method of the student class
+	 * The do-nothing method of the student class, serves as a placeholder for child classes
 	 */
 	public void tuitionDue() { 
 		

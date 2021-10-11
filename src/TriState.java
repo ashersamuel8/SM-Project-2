@@ -13,6 +13,9 @@ public class TriState extends NonResident {
 		this.state = state;
 	}
 	
+	/**
+	 * This method calculates the tuition for TriState students, it takes into account the scholarship for NY and CT students.
+	 */
 	@Override
 	public void tuitionDue() {
 		super.tuitionDue();

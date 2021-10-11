@@ -34,6 +34,9 @@ public class Resident extends Student {
 		return this.financialAid;
 	}
 	
+	/**
+	 * This method calculates the tuition for Resident students
+	 */
 	@Override
 	public void tuitionDue() {
 		if (this.getNumberOfCredits() >= 12) {

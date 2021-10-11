@@ -1,10 +1,13 @@
 /Date.class
+/DateTest.class
 /International.class
+/InternationalTest.class
 /Major.class
 /NonResident.class
 /Profile.class
 /Resident.class
 /Roster.class
+/RosterTest.class
 /RunProject2.class
 /Student.class
 /TriState.class

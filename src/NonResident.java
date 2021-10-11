@@ -19,7 +19,9 @@ public class NonResident extends Student {
 		super(name, major, numberOfCredits);
 	}
 	
-	
+	/**
+	 * This method calculates the tuition for NonResident students.
+	 */
 	@Override
 	public void tuitionDue() {
 		if (this.getNumberOfCredits() >= 12) {

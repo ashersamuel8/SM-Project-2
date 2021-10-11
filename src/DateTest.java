@@ -13,7 +13,6 @@ public class DateTest {
 		Date date4 = new Date("12/1/2021");
 		Date date5 = new Date("11/1/2020");
 		Date date6 = new Date("7/32/2021");
-
 		Date date7 = new Date("2/1/2021");
 		Date date8 = new Date("9/12/2021");
 		Date date9 = new Date("8/30/2021");
@@ -21,7 +20,7 @@ public class DateTest {
 		Date date11 = new Date("7/12/2021");
 		Date date12 = new Date("8/12/2021");
 		Date date13 = new Date("5/31/2021");
-
+		
 		assertFalse(date1.isValid());
 		assertFalse(date2.isValid());
 		assertFalse(date3.isValid());
