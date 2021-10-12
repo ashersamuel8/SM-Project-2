@@ -29,7 +29,7 @@ public class Profile {
 	
 	/**
 	 * Checks if two profiles are equal or not
-	 * @param Object obj
+	 * @param obj
 	 * @return true if objects are equal, false otherwise
 	 */
 	@Override

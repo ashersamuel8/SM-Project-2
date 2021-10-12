@@ -2,6 +2,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * This is the JUnit test class for the tuitionDue() method in the International class
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ *
+ */
+
+
 public class InternationalTest {
 
 

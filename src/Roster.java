@@ -72,9 +72,7 @@ public class Roster {
 			return true;
 			
 		}
-		
-		return false;
-			
+		return false;	
 	} 
 	
 	/**
@@ -98,11 +96,8 @@ public class Roster {
 				}	
 				size--;
 				return true;
-			
 		}
-		
 		return false;
-		
 	}
 	
 	/**
@@ -185,38 +180,51 @@ public class Roster {
 			return;
 		}
 		
-		System.out.println("* List of students made payments ordered by payment date **");
+		System.out.println("* List of students ordered by payment date **");
+		
+		//Creating a temporary array list to store data of students who made at least one payment
+		Student[] tempRosterList = new Student[rosterList.length];
+		
+		int rosterListIndex = 0;
+		int tempRosterListIndex = 0;
+		
+		//Copying the data into the temporary array list
+		while(true) {
+			
+			if (rosterListIndex == rosterList.length) break;
+			if (rosterList[rosterListIndex] == null) break;
+			if(rosterList[rosterListIndex].getTotalPayment() != 0) {
+				tempRosterList[tempRosterListIndex] = rosterList[rosterListIndex];
+				tempRosterListIndex++;
+			}
+			rosterListIndex++;
+		}
 		
 		
-		for( int i = 0; i < rosterList.length; i++ ) {
+		for( int i = 0; i < tempRosterList.length; i++ ) {
 			
-			if (rosterList[i] == null) break;
+			if (tempRosterList[i] == null) break;
 			
-		    for( int j=0; j < rosterList.length - 1; j++ ) {
+		    for( int j = 0; j < tempRosterList.length - 1; j++ ) {
 		    	
-		    	if(rosterList[j] == null || rosterList[j+1] == null) break;
+		    	if(tempRosterList[j] == null || tempRosterList[j+1] == null) break;
 		    	
-		    	if(rosterList[j].getTotalPayment() == 0 || rosterList[j+1].getTotalPayment() == 0) continue;
-		    	
-		        if( rosterList[j].getPaymentDate().compareTo(rosterList[j+1].getPaymentDate()) > 0 ) {
+		    	if(tempRosterList[j].getPaymentDate().compareTo(tempRosterList[j+1].getPaymentDate()) > 0 ) {
 		        	
-		        	Student temp = rosterList[j];
-		        	rosterList[j] = rosterList[j+1];
-		        	rosterList[j+1] = temp;
-		        		
+		        	Student temp = tempRosterList[j];
+		        	tempRosterList[j] = tempRosterList[j+1];
+		        	tempRosterList[j+1] = temp;
+		      	
 		       }
+		    
 		    }
 		    
 		}
 		
-		for (int i = 0; i < rosterList.length; i++) {
+		for (int i = 0; i < tempRosterList.length; i++) {
 			
-			if (rosterList[i] == null) break;
-			
-			if (rosterList[i].getTotalPayment() == 0) continue;
-			
-			System.out.println(rosterList[i].toString());
-			
+			if (tempRosterList[i] == null) break;
+			System.out.println(tempRosterList[i].toString());
 		}
 		
 		System.out.println("* End of roster **");
@@ -236,8 +244,6 @@ public class Roster {
 			rosterList[i].tuitionDue();
 			
 		}
-		
-		
 	}
 	
 	/**
@@ -257,7 +263,7 @@ public class Roster {
 		
 		if(index != -1) {
 			
-			if((rosterList[index].getTotalPayment() + fees) > rosterList[index].getTuition()) {
+			if((rosterList[index].getTuition() - fees) < 0) {
 				return 1;
 			}
 			else {
@@ -316,10 +322,11 @@ public class Roster {
 	 * @param name
 	 * @param major
 	 * @param financialAid
-	 * @return -1 if the student is part time
-	 * @return 0 if financial aid has already been awarded
-	 * @return 1 if the financial aid has been awarded
-	 * @return -2 if the student is not a resident student/student is not found
+	 * @return 2 if the financial aid is awarded
+	 * @return 1 if financial aid has already been awarded
+	 * @return 0 if the student is part time
+	 * @return -1 if the student is not a resident student
+	 * @return -2 if the student is not in the roster
 	 */
 	public int calculateFinancialAid(String name, Major major, double financialAid) {
 		
@@ -331,7 +338,7 @@ public class Roster {
 			
 			if(rosterList[index] instanceof Resident) {
 				
-				if(rosterList[index].getNumberOfCredits() < 12) return -1;
+				if(rosterList[index].getNumberOfCredits() < 12) return 0;
 				
 				else {
 					
@@ -340,21 +347,22 @@ public class Roster {
 						((Resident) rosterList[index]).setFinancialAid(financialAid);
 						rosterList[index].setTuition(rosterList[index].getTuition() - financialAid);
 						
-						return 1;
+						return 2;
 					}
 					
-					return 0;
+					return 1;
 					
 				}
 				
 			}
+			
+			return -1;
 	
 		}
 		
 		return -2;
 		
 	}
-	
 	
 	public Roster(){
 		

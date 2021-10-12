@@ -31,7 +31,7 @@ public class TuitionManager {
 		while(true) {
 			
 			try {	
-			
+				
 				inputObj = new Scanner(System.in);			
 		
 				inputString = inputObj.nextLine();	
@@ -558,7 +558,7 @@ public class TuitionManager {
 			
 		} catch(NumberFormatException e) {
 			
-			System.out.println("Invalid fees.");
+			System.out.println("Invalid Amount.");
 			
 		} catch(InputMismatchException e) {
 			
@@ -647,22 +647,24 @@ public class TuitionManager {
 
 			switch(roster.calculateFinancialAid(name, major, aid)) {
 			
-			case 1:
+			case 2:
 				System.out.println("Tuition Updated.");
 				break;
 				
-			case 0:
+			case 1:
 				System.out.println("Awarded once already.");
 				break;
 				
-			case -1:
+			case 0:
 				System.out.println("Parttime student doesn't qualify for the award.");
 				break;
 				
-			case -2:
+			case -1:
 				System.out.println("Not a resident student.");
 				break;
 				
+			case -2:
+				System.out.println("Student not in the roster.");
 			}
 			
 			

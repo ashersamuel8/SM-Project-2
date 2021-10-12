@@ -50,10 +50,14 @@ public class Student {
 		
 	}
 	
+	/**
+	 * This method prints out the data of the Student object
+	 * @return string format of Student
+	 */
 	@Override
 	public String toString() {
 		
-		final DecimalFormat decimalFormat = new DecimalFormat( "##,##,###.00" );
+		final DecimalFormat decimalFormat = new DecimalFormat( "##,##,##0.00" );
 		String output = this.profile.toString() + ":" + this.numberOfCredits + " credits hours:tuition due:" 
 						+ decimalFormat.format(this.tuition) + ":total payment:";
 		

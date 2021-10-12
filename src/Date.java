@@ -8,6 +8,11 @@ import java.util.Calendar;
 
 import java.util.StringTokenizer;
 
+/**
+ * This is the Date class that creates Date objects 
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ */
 public class Date implements Comparable<Date> {
 
 	private int year;

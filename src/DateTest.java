@@ -2,6 +2,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * This is the JUnit test class for the isValid() method in the Date class
+ * @author Bhavya Patel
+ * @author Samuel Asher Kappala
+ * 
+ */
 public class DateTest {
 
 	@Test

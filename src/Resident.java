@@ -9,7 +9,7 @@ public class Resident extends Student {
 	private double financialAid = 0;
 	
 	/**
-	 * 
+	 * This is the constructor method for Resident class
 	 * @param name
 	 * @param major
 	 * @param numberOfCredits
