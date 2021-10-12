@@ -28,7 +28,7 @@ public class Resident extends Student {
 	
 	/**
 	 * A getter method that returns the financial aid of the resident student
-	 * @return financialAid 
+	 * @return Financial Aid 
 	 */
 	public double getFinancialAid() {
 		return this.financialAid;

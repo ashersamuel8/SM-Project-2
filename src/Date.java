@@ -43,11 +43,18 @@ public class Date implements Comparable<Date> {
 		this.day = Integer.parseInt(buffer.nextToken());
 		this.year = Integer.parseInt(buffer.nextToken());
 	}
-
+	/**
+	 * returns month
+	 * @return
+	 */
 	public int getMonth() {
 		return this.month;
 	}
 	
+	/**
+	 * returns day
+	 * @return
+	 */
 	public int getDay() {
 		return this.day;
 	}

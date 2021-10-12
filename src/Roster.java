@@ -252,9 +252,7 @@ public class Roster {
 	 * @param major
 	 * @param fees
 	 * @param paymentDate
-	 * @return 1 if the fees exceeds tuition due
-	 * @return 0 if the fees is payed and tuition is updated
-	 * @return -1 if the student doesnt exist
+	 * @return 1 if the fees exceeds tuition due, 0 if the fees is payed and tuition is updated, -1 if the student doesnt exist
 	 */
 	public int payTuition(String name, Major major, double fees, Date paymentDate) {
 				
@@ -282,9 +280,9 @@ public class Roster {
 	 * @param name
 	 * @param major
 	 * @param studyAbroadStatus
-	 * @return 1 if the study abroad status is succesfully changed
-	 * @return 0 if the study abroad status is the same as the one that already exists
-	 * @return -1 if the study abroad status is not changed/Student is not an itnernational student/Student not found
+	 * @return 1 if the study abroad status is succesfully changed,
+	 * 0 if the study abroad status is the same as the one that already exists, 
+	 * -1 if the study abroad status is not changed/Student is not an itnernational student/Student not found
 	 */
 	public int setStudyAbroadStatus(String name, Major major, boolean studyAbroadStatus) {
 		
@@ -322,11 +320,11 @@ public class Roster {
 	 * @param name
 	 * @param major
 	 * @param financialAid
-	 * @return 2 if the financial aid is awarded
-	 * @return 1 if financial aid has already been awarded
-	 * @return 0 if the student is part time
-	 * @return -1 if the student is not a resident student
-	 * @return -2 if the student is not in the roster
+	 * @return 2 if the financial aid is awarded, 
+	 * 1 if financial aid has already been awarded, 
+	 * 0 if the student is part time, 
+	 * -1 if the student is not a resident student, 
+	 * -2 if the student is not in the roster
 	 */
 	public int calculateFinancialAid(String name, Major major, double financialAid) {
 		
